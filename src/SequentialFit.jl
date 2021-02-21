@@ -16,7 +16,9 @@ function SeqFit(f,model,X,p0)
     Y = f.(X)
     SeqFit(f,model,copy(X),Y,curve_fit(model,X,Y,p0))
 end
-SeqFit(f,model,p0) = SeqFit(f,model,Float64[],p0)
+function SeqFit(f,model,p0)
+    SeqFit(f,model,[-1.0,0.0,1.0],p0)
+end
 
 function push!(s::SeqFit,x...)
     push!(s.X,x...)
@@ -42,13 +44,16 @@ function selectionFunction(x,s)
 end
 
 @recipe function f(s::SeqFit; groundtruth=false, selection=false)
+
     @series begin # measurements
+        subplot:=1
         seriestype:=:scatter
         label-->"Samples"
         s.X, s.Y
     end
 
     @series begin # fit
+        subplot:=1
         seriestype:=:line
         label-->"Fit"
         x->s.model(x,s.fit.param)
@@ -56,6 +61,7 @@ end
 
     if groundtruth
         @series begin # Ground truth
+            subplot:=1
             seriestype:=:line
             linestyle-->:dash
             label-->"Ground truth"
@@ -64,10 +70,16 @@ end
     end
 
     if selection
+        layout := (2,1)
+        link := :x
         @series begin # Selection function
+            subplot:=2
             seriestype:=:line
             linestyle-->:dash
             label-->"Selection function"
+            ylims:=:auto
+            yticks:=false
+            legend:=:bottomright
             x->selectionFunction(x,s)
         end
     end
