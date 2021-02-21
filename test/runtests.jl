@@ -1,6 +1,6 @@
-using SequentialOptimization
+using SequentialFit
 using Test
 
-@testset "SequentialOptimization.jl" begin
+@testset "SequentialFit.jl" begin
     # Write your tests here.
 end

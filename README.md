@@ -1,4 +1,4 @@
-# SequentialOptimization
+# SequentialFit
 ## Motivation
 If we have an unknown function ``f(x)`` which we can only sample, we can choose
 a *known* function ``g(x,p)`` characterized by a parameter vector ``p``.
@@ -15,7 +15,7 @@ This package implements this sequential sampling method.
 
 ## Usage example
 ```julia
-using SequentialOptimization, Plots
+using SequentialFit, Plots
 gaussian(x,mu,sigma) = exp(-((x-mu)/sigma)^2)
 function expensiveFunction(x)
     sleep(2) # This function takes several seconds to run

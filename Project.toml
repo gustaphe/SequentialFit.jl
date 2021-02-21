@@ -1,4 +1,4 @@
-name = "SequentialOptimization"
+name = "SequentialFit"
 uuid = "ba2dccd1-bacd-4137-a44e-92242b84056d"
 authors = ["David Gustavsson <david.e.gustavsson@gmail.com> and contributors"]
 version = "0.1.0"

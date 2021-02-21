@@ -1,4 +1,4 @@
-module SequentialOptimization
+module SequentialFit
 using LsqFit, RecipesBase, Calculus, Optim, LinearAlgebra
 
 export SeqFit, update!, next_x
