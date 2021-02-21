@@ -42,20 +42,23 @@ function selectionFunction(x,s)
 end
 
 @recipe function f(s::SeqFit; groundtruth=false, selection=false)
-    legend --> false
     @series begin # measurements
         seriestype:=:scatter
+        label-->"Samples"
         s.X, s.Y
     end
 
     @series begin # fit
         seriestype:=:line
+        label-->"Fit"
         x->s.model(x,s.fit.param)
     end
 
     if groundtruth
         @series begin # Ground truth
             seriestype:=:line
+            linestyle-->:dash
+            label-->"Ground truth"
             s.f
         end
     end
@@ -63,6 +66,8 @@ end
     if selection
         @series begin # Selection function
             seriestype:=:line
+            linestyle-->:dash
+            label-->"Selection function"
             x->selectionFunction(x,s)
         end
     end

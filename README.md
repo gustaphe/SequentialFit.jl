@@ -28,9 +28,24 @@ s = SeqFit(expensiveFunction,model,x0,p0)
 push!(s,-1.5,1.5) # Sample specific points
 update!(s) # Figures out where to sample next, does, and updates the parameters
 println(s.fit.param) # The found parameters
-plot(s)
+plot(s) # Show sampled points and fitted curve. Can also show ground truth with `groundtruth=true`, but this of course doesn't work with slow functions.
 ```
+
+## Visualization
+The script in `doc/example.jl` generates the following figures:
+
+![Sequential fitting procedure](./doc/example.gif)
+
+![Performance](./doc/example_errors.png)
 
 ## Selection method
 The next point is chosen as an ``x^*`` that minimizes 
 `` -\left|\nabla_p g(x,p) \right|^2 \cdot \prod_{x\in X} (x-x^*)^2``
+
+## Disclaimer
+I haven't properly done the math on this. There might well be a paper out there that disproves this entire concept. Please let me know why this is wrong and stupid.
+
+## Todo
+* Add possibility to supply analytical gradient expression 
+* Look into multi-variate stuff
+* Stop procrastinating cleaning your apartment
