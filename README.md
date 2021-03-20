@@ -1,4 +1,6 @@
 # SequentialFit
+[![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
+
 ## Motivation
 If we have an unknown function ``f(x)`` which we can only sample, we can choose
 a *known* function ``g(x,p)`` characterized by a parameter vector ``p``.
