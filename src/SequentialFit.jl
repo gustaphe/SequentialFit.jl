@@ -11,13 +11,14 @@ mutable struct SeqFit
     X
     Y
     fit
+    lims
 end
-function SeqFit(f, model, X, p0)
+function SeqFit(f, model, X, p0, lims=(-Inf, Inf))
     Y = f.(X)
-    return SeqFit(f, model, copy(X), Y, curve_fit(model, X, Y, p0))
+    return SeqFit(f, model, copy(X), Y, curve_fit(model, X, Y, p0), lims)
 end
 function SeqFit(f, model, p0)
-    return SeqFit(f, model, [-1.0, 0.0, 1.0], p0)
+    return SeqFit(f, model, [-1.0, 0.0, 1.0], p0, lims)
 end
 
 function push!(s::SeqFit, x...)
@@ -35,7 +36,8 @@ function next_x(s::SeqFit)
     isempty(s.X) && return zero(eltype(s.X))
     o = optimize(
         x -> selectionFunction(x, s),
-        ([2 -1; -1 2] * [extrema(s.X)...])..., # cast a net 100 % outside limits
+        max(2*minimum(s.X)-maximum(s.X), s.lims[1]),
+        min(2*maximum(s.X)-minimum(s.X), s.lims[2]),
     )
     return o.minimizer
 end

@@ -11,12 +11,11 @@ Optim = "429524aa-4258-5aef-a3af-852621145aeb"
 RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
 
 [compat]
-julia = "1"
 Calculus = "<2"
 LsqFit = "<1"
 Optim = "<2"
 RecipesBase = "<2"
-
+julia = "1"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
